@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #F9FAFB;
+    --bg-card: #FFFFFF;
+    --bg-hover: #F3F4F6;
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --border: #E5E7EB;
+    --input-bg: #F9FAFB;
+  }
+
+  .dark {
+    --bg: #0F172A;
+    --bg-card: #1E293B;
+    --bg-hover: #334155;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --border: #334155;
+    --input-bg: #1E293B;
+  }
+
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    @apply rounded-2xl shadow-soft;
+  }
+
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-dark text-white font-semibold px-5 py-2.5 rounded-xl
+           transition-all duration-200 hover:shadow-glow hover:-translate-y-0.5
+           active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0;
+  }
+
+  .btn-secondary {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+    @apply font-semibold px-5 py-2.5 rounded-xl transition-all duration-200
+           hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 rounded-xl font-medium transition-all duration-200;
+    color: var(--text-secondary);
+  }
+  .btn-ghost:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  .input-field {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    @apply w-full rounded-xl px-4 py-3 text-sm outline-none
+           focus:ring-2 focus:ring-primary/30 focus:border-primary
+           placeholder:text-gray-400 dark:placeholder:text-slate-500
+           transition-all duration-200;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--bg-hover) 25%,
+      var(--border) 50%,
+      var(--bg-hover) 75%
+    );
+    background-size: 200% 100%;
+    @apply animate-skeleton rounded-xl;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200;
+    color: var(--text-secondary);
+  }
+  .nav-link:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+  }
+  .nav-link.active {
+    @apply bg-primary/10 text-primary font-semibold;
+  }
+
+  .avatar {
+    @apply rounded-full object-cover bg-gradient-to-br from-primary to-secondary flex-shrink-0;
+  }
+
+  .like-btn {
+    @apply flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200;
+    color: var(--text-secondary);
+  }
+  .like-btn:hover {
+    background-color: #FEE2E2;
+    color: #EF4444;
+  }
+  .like-btn.liked {
+    background-color: #FEE2E2;
+    color: #EF4444;
+  }
+
+  .comment-btn {
+    @apply flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200;
+    color: var(--text-secondary);
+  }
+  .comment-btn:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  .share-btn {
+    @apply flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200;
+    color: var(--text-secondary);
+  }
+  .share-btn:hover {
+    background-color: #E0F2FE;
+    color: #0284C7;
+  }
+
+  .message-bubble-sent {
+    @apply bg-primary text-white rounded-2xl rounded-br-sm px-4 py-2.5 max-w-xs break-words;
+  }
+  .message-bubble-received {
+    @apply rounded-2xl rounded-bl-sm px-4 py-2.5 max-w-xs break-words;
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+  }
+}
+
+/* Staggered animation for post list */
+.post-item:nth-child(1) { animation-delay: 0ms; }
+.post-item:nth-child(2) { animation-delay: 60ms; }
+.post-item:nth-child(3) { animation-delay: 120ms; }
+.post-item:nth-child(4) { animation-delay: 180ms; }
+.post-item:nth-child(5) { animation-delay: 240ms; }
+.post-item:nth-child(6) { animation-delay: 300ms; }
+
+/* Heart animation */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+.heart-pop {
+  animation: heartPop 0.35s ease forwards;
+}
